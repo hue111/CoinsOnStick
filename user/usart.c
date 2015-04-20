@@ -1,5 +1,6 @@
 #include "usart.h"
 
+//PA.2 Tx	PA.3 Rx
 void usart2_init(void){
 	GPIO_InitTypeDef GPIO_InitStructure; 
 	USART_InitTypeDef USART_InitStructure; 
@@ -10,7 +11,7 @@ void usart2_init(void){
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;//--------------
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; 
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
                                                           
@@ -30,3 +31,16 @@ void usart2_init(void){
 	
 	USART_Cmd(USART2, ENABLE); 
 }
+
+////返回值：	0		(无数据传入)
+////			RxDATA	(有数据传入)
+//uint16_t usart2_received(void)
+//{
+//	uint16_t RxDATA = 0;
+//	
+//	if(!USART_GetFlagStatus(USART2, USART_FLAG_RXNE) == SET) return(0);
+//	
+//	RxDATA = USART_ReceiveData(USART2);
+//	return(RxDATA);
+//}
+
