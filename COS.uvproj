@@ -554,18 +554,6 @@
         </Group>
         <Group>
           <GroupName>parts</GroupName>
-          <Files>
-            <File>
-              <FileName>motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\parts\motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>sensor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\parts\sensor.c</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>

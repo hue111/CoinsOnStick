@@ -2,22 +2,26 @@
 
 int main(){
 	uint8_t time = 0;
-	uint16_t RxDATA = 19;
+	uint8_t loop_i = 0;
 	usart2_init();
 	delay_init();
-	while(1)  
-	{  
-		RxDATA = USART_ReceiveData(USART2);;
-		if(RxDATA != 0){
-			printf("%d s\t DATA is\t%d\n",time++,RxDATA);
-		}
-		else{
-			printf("%d s\t NoDATAComeIn!\n",time++);
-		}
+	
+	
+	 //发送内部数据
+	while(1){  
+		printf("\n%d s\t passed!",time++);
 		delay_ms(1000);
 	} 
-  
-	while(1);
+	 //处理由串口接受到的数据
+	while(1){
+		Usart2Received_DMA1start();
+		for(loop_i=0;loop_i<8;loop_i++){
+			printf("%c\t",DstBuffer[loop_i]);
+		}
+		delay_ms(1000);
+		printf("\nwait for the next putin :\n");
+	}
+	while(1){}
 	return 0;
 }
 

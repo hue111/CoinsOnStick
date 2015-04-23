@@ -34,14 +34,21 @@
   * @{
   */
 
-/** @addtogroup GPIO_IOToggle
+/** @addtogroup SysTick_Handler
   * @{
   */
+ 
+/** @addtogroup DMA1_Channel6_IRQHandler
+  * @{
+  */
+
+
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern __IO uint32_t EndOfTransfer;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -145,6 +152,24 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   TimingDelay_Decrement();
+}
+
+/**
+  * @brief  This function handles DMA1_Channel6_IRQ Handler.
+  * @param  None
+  * @retval None
+  */
+void DMA1_Channel6_IRQHandler(void)
+{
+	/* Test on DMA1 Channel6 Transfer Complete interrupt */
+  if(DMA_GetITStatus(DMA1_IT_TC6))
+  {
+    /* DMA1 finished the transfer of SrcBuffer */
+    EndOfTransfer = 1;
+
+    /* Clear DMA1 Channel6 Half Transfer, Transfer Complete and Global interrupt pending bits */
+    DMA_ClearITPendingBit(DMA1_IT_GL6);
+  }
 }
 
 /******************************************************************************/
