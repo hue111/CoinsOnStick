@@ -3,3 +3,8 @@
 #include "usart.h"
 #include "delay.h"
 #include <stdio.h>
+#include "TIM_init.h"
+#include "iic.h"
+#include "MPU6050.h"
+#include "motor.h"
+

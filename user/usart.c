@@ -1,8 +1,8 @@
 #include "usart.h"
 #include "delay.h"
-
-	uint16_t DstBuffer[BUFFER_SIZE] = {0};
-	__IO uint32_t EndOfTransfer = 0;
+#include "stdio.h"
+uint16_t DstBuffer[BUFFER_SIZE] = {0};
+__IO uint32_t EndOfTransfer = 0;
 	
 //PA.2 Tx	PA.3 Rx
 void usart2_init(void){
@@ -77,4 +77,12 @@ void Usart2Received_DMA1start(void)
 	while (EndOfTransfer == 0)
 		;
 	EndOfTransfer = 0;
+}
+
+int fputc(int ch, FILE *f)
+{
+	USART_SendData(USART2, (unsigned char) ch);//------------
+	while (!USART_GetFlagStatus(USART2, USART_FLAG_TXE) == SET)
+		;
+	return (ch);
 }

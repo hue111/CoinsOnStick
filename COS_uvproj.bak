@@ -362,7 +362,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F30X,</Define>
               <Undefine></Undefine>
-              <IncludePath>.\hardwares;.\lib\inc;.\parts;.\user</IncludePath>
+              <IncludePath>.\hardwares;.\lib\inc;.\parts;.\user;.\control</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -434,6 +434,11 @@
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\user\delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>iic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\user\iic.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -556,14 +561,9 @@
           <GroupName>parts</GroupName>
           <Files>
             <File>
-              <FileName>motor.c</FileName>
+              <FileName>mpu6050.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\parts\motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>sensor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\parts\sensor.c</FilePath>
+              <FilePath>.\hardwares\mpu6050.c</FilePath>
             </File>
           </Files>
         </Group>

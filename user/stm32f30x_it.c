@@ -28,7 +28,9 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "motor.h"
+#include "delay.h"
+#include "TIM_init.h"
 
 /** @addtogroup STM32F3_Discovery_Peripheral_Examples
   * @{
@@ -186,6 +188,26 @@ void DMA1_Channel6_IRQHandler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
+
+/************************************************************
+*函数名称:void TIM1_IRQHandler(void)
+*功    能:TIM1中断入口函数
+*说    明:定时45us控制电机S曲线加速
+*算    法:前台控制各种标志寄存器, 后台处理标志寄存器, 完成动作
+*输入参数:无
+*输出参数:无
+*************************************************************/
+void TIM1_CC_IRQHandler(void)
+{
+	if (TIM_GetITStatus(TIM1, TIM_IT_CC3) != RESET){     //捕获比较3中断
+        TIM_ClearITPendingBit(TIM1, TIM_IT_CC3);
+        //X-------------------------------------------------
+        MotorXDriveInTimer();   //IN 10us/140us //X电机定时输出
+        capture = TIM_GetCapture3(TIM1);
+        TIM_SetCompare3(TIM1, capture + TIM1CCR3_Val);  //更改定时值
+    }
+}
+
 
 /**
   * @}
